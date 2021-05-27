@@ -1,0 +1,161 @@
+html,body
+{
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden; 
+}
+
+body 
+{
+    background: linear-gradient(to right, rgba(39, 70, 133, 0.8) 0%, rgba(61, 179, 197, 0.8) 100%), url(../images/hero-bg.jpg);
+    position: relative;
+    background-size: cover;
+}
+
+#title 
+{
+    font-size: 40px;
+    width: 100%;
+    margin: 2% 5%;
+    text-align: center;
+    font-family: myriad-pro, sans-serif;
+    font-style: normal;
+    color: #0;
+}
+
+#loginDiv
+{
+    font-size: 30px;
+    width: 70%;
+    margin-left: 15%;
+    padding: 25px;
+    background-color: #0;
+}
+
+#loggedInDiv
+{
+    font-size: 30px;
+    width: 70%;
+    margin-left: 15%;
+    padding: 25px;
+    
+}
+
+#accessUIDiv
+{
+    font-size: 30px;
+    width: 70%;
+    margin-left: 15%;
+    padding: 25px;
+    
+}
+
+.buttons
+{
+    font-size: 30px;
+    width: 50%;
+    margin-left: 25%;
+    font-family: myriad-pro, sans-serif;
+    font-style: normal;
+    background-color: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+   
+}
+
+.buttons:hover{
+    border: 2px solid #fff;
+    background: white;
+    color: #0d6efd;
+}
+
+#loginName
+{
+	font-size: 30px;
+}
+#loginPassword
+{
+	font-size: 30px;
+}
+#searchText
+{
+	font-size: 30px;
+}
+#colorText
+{
+	font-size: 30px;
+}
+
+input[type="text"],input[type="password"]{
+    border-radius: 25px;
+    text-align: center;
+    width: 80%;
+    margin-left: 10%;
+    margin-bottom: 2%;
+    font-family: myriad-pro, sans-serif;
+    
+}
+
+#inner-title{
+    display: inline-block;
+    font-size: 1.5em;
+    width: 90%;
+    text-align: center;
+    margin-left: 5%;
+    margin-bottom: 2%;
+    font-family: myriad-pro, sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    
+}
+
+#loginResult{
+    display: inline-block;
+    font-size: 0.8em;
+    width: 90%;
+    text-align: center;
+    margin-left: 5%;
+    margin-bottom: 2%;
+    font-family: myriad-pro, sans-serif;
+    font-style: normal;
+    color: #95060a;
+}
+
+#userName{
+    display: inline-block;
+    width: 80%;
+    margin-left: 10%;
+    text-align: center;
+}
+
+#logoutButton{
+    width: 20%;
+    margin-left: 40%;
+}
+
+select{
+    width: 30%;
+    margin-left: 35%;
+    margin-top: 2%;
+    font-size: 0.75em;
+    font-family: myriad-pro, sans-serif;
+    font-style: normal;
+}
+
+#colorSearchResult{
+    display: none;
+}
+
+#colorAddResult{
+    display: inline-block;
+    font-size: 0.8em;
+    width: 90%;
+    text-align: center;
+    margin-left: 5%;
+    margin-top: 2%;
+    margin-bottom: 1%;
+    font-family: myriad-pro, sans-serif;
+    font-style: normal;
+    color: #95060a;
+}
