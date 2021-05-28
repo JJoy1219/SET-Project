@@ -1,3 +1,26 @@
+mysql> select * from Contacts;
++----+-------------+-----------------+-------------+------------------------+---------------------+--------+
+| ID | ContactName | ContactLastName | PhoneNumber | Email                  | ContactCreated      | UserID |
++----+-------------+-----------------+-------------+------------------------+---------------------+--------+
+|  1 | Paola       | Londono         | 4077481215  | pao4280@gmail.com      | 2021-05-21 00:00:00 |      1 |
+|  2 | Rose        | Smith           | 4075748374  | roser@gmail.com        | 2021-05-27 00:00:00 |      2 |
+|  3 | George      | Reeves          | 3647485629  | gprx@xmail.com         | 2021-05-27 00:00:00 |      3 |
+|  4 | Gabrielle   | Smith           | 6487352937  | pinky@gmail.com        | 2021-05-27 00:00:00 |      4 |
+|  5 | Andre       | Carson          | 3846574937  | ronn35@gmail.com       | 2021-05-27 00:00:00 |      5 |
+|  6 | Ronnie      | Smith           | 4074659564  | running@cloudmail.com  | 2021-05-27 00:00:00 |      1 |
+|  7 | Alexis      | Gonzalez        | 5364957456  | alexgon@go.com         | 2021-05-27 00:00:00 |      2 |
+|  8 | Smiddie     | Grant           | 4077856374  | gman@mail.com          | 2021-05-27 00:00:00 |      3 |
+|  9 | Lori        | Graham          | 9995746357  | xyz123@account.com     | 2021-05-27 00:00:00 |      4 |
+| 10 | Tim         | Sotomayor       | 6645374488  | timayor@gmail.com      | 2021-05-27 00:00:00 |      5 |
+| 11 | Carson      | Smith           | 3338465773  | csmith3@mail.com       | 2021-05-27 00:00:00 |      1 |
+| 12 | Annie       | Garcia          | 3452736456  | annieg123@fox.com      | 2021-05-27 00:00:00 |      2 |
+| 13 | Connie      | Garcia          | 4074476655  | conga@gmail.com        | 2021-05-27 00:00:00 |      3 |
+| 14 | Andy        | Lee             | 9874465867  | andisito@cloudmail.com | 2021-05-27 00:00:00 |      4 |
+| 15 | Susan       | Chan            | 3455645377  | suchan0@gmail.com      | 2021-05-27 00:00:00 |      5 |
++----+-------------+-----------------+-------------+------------------------+---------------------+--------+
+
+
+
 CREATE TABLE `COP4331`.`Contacts`
 (
  `ID` INT NOT NULL AUTO_INCREMENT ,
