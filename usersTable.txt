@@ -1,0 +1,28 @@
+CREATE TABLE `COP4331`.`Users`
+(
+`ID` INT NOT NULL AUTO_INCREMENT ,
+`DateCreated` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+`FirstName` VARCHAR(50) NOT NULL DEFAULT '' ,
+`LastName` VARCHAR(50) NOT NULL DEFAULT '' ,
+`Login` VARCHAR(50) NOT NULL DEFAULT '' ,
+`Password` VARCHAR(50) NOT NULL DEFAULT '' ,
+PRIMARY KEY (`ID`)
+)
+ENGINE = InnoDB;
+
+
+
+insert into Users (DateCreated,FirstName,LastName,Login,Password,ID) VALUES
+(CURDATE(),'John','Smith','johnS','pass123',1);
+
+insert into Users (DateCreated,FirstName,LastName,Login,Password,ID) VALUES
+(CURDATE(),'Anna','Ross','ross12','unit34',2);
+
+insert into Users (DateCreated,FirstName,LastName,Login,Password,ID) VALUES
+(CURDATE(),'Clare','Fraser','Outland12','grass888',3);
+
+insert into Users (DateCreated,FirstName,LastName,Login,Password,ID) VALUES
+(CURDATE(),'Felix','Ornell','felix1','abc123',4);
+
+insert into Users (DateCreated,FirstName,LastName,Login,Password,ID) VALUES
+(CURDATE(),'Claude','Clermont','claude2000','mypass000',5);
