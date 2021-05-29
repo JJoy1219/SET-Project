@@ -2,13 +2,13 @@
 	$inData = getRequestInfo();
 
 	$contactName = $inData["ContactName"];
-	$contactLastname = $inData["contactLastname"];
-	$phoneNumber = $inData["phoneNumber"];
-	$email = $inData["email"];
-	$contactCreated = $inData["contactCreated"];
-	$userId = $inData["userId"];
+	$contactLastname = $inData["ContactLastName"];
+	$phoneNumber = $inData["PhoneNumber"];
+	$email = $inData["Email"];
+	$contactCreated = $inData["ContactCreated"];
+	$userId = $inData["UserId"];
 
-	$conn = new mysqli("localhost", "TheUser", "Password1", "COP4331");
+	$conn = new mysqli("localhost", "admin", "password", "COP4331");
 	if ($conn->connect_error)
 	{
 		returnWithError( $conn->connect_error );
@@ -20,7 +20,7 @@
 		$stmt->execute();
 		$stmt->close();
 		$conn->close();
-		returnWithError("");
+	  returnWithError("");
 	}
 
 	function getRequestInfo()
