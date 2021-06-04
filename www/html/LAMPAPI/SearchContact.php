@@ -12,9 +12,9 @@
 	}
 	else
 	{
-		$stmt = $conn->prepare("select ContactName,ContactLastName from Contacts where (ContactName like ? or ContactLastName like ?)and UserID=?");
+		$stmt = $conn->prepare("select * from Contacts where (ContactName like ? or ContactLastName like ?) and UserID=?");
 		$contactName = "%" . $inData["search"] . "%";
-		$stmt->bind_param("ss", $contactName, $contactLastname, $inData["UserID"]);
+		$stmt->bind_param("sss", $contactName, $contactName, $inData["UserID"]);
 		$stmt->execute();
 
 		$result = $stmt->get_result();
@@ -26,16 +26,10 @@
 				$searchResults .= ",";
 			}
 			$searchCount++;
-			$searchResults .= '"' . $row["ContactName"] .' ' . $row["ContactLastName"] . ' '
-														. $row["PhoneNumber"] . ' ' . $row["Email"] . ' '
-														. $row["ContactCreated"] . ' ' . $row["UserID"]'"';
+			// Source: https://www.w3schools.com/php/php_json.asp
+			// Note: The json_encode() function is used to encode a value to JSON format.
+			$searchResults .= json_encode($row);
 
-
-			/* $json = '{"ContactName" : "' . $row["ContactName"] . '", "ContactLastName" : "' . $row["ContactLastName"] . '","PhoneNumber" : "' . $row["PhoneNumber"] . '", "Email" : "' . $row["Email"] . '",
-				 "ContactCreated" : "' . $row["ContactCreated"] . '", "UserID" : "' . $row["UserID"] . '",'"}';
-
-			   $searchResults .= $json;
-			*/
 		}
 
 		if( $searchCount == 0 )
