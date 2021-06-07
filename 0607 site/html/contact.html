@@ -1,0 +1,263 @@
+<html>
+<head>
+	<title>Contacts</title>
+	<script type="text/javascript" src="js/code.js"></script>
+   	 <link href="css/styles.css" rel="stylesheet">
+    	<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+	<script type="text/javascript" src="js/code.js"></script>
+  	  <link href="css/styles.css" rel="stylesheet">
+  	  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+
+	<script type="text/javascript">
+	document.addEventListener('DOMContentLoaded', function()
+	{
+		readCookie();
+	}, false);
+	</script>
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Style the search field */
+form.example input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+/* Style the submit button */
+form.example button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none; /* Prevent double borders */
+  cursor: pointer;
+}
+
+form.example button:hover {
+  background: #0b7dda;
+}
+
+/* Clear floats */
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+* {box-sizing: border-box;}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* Add a background color when the inputs get focus */
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+button:hover {
+  opacity:1;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+  padding: 14px 20px;
+  background-color: #f44336;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn, .signupbtn {
+  float: left;
+  width: 50%;
+}
+
+/* Add padding to container elements */
+.container {
+  padding: 16px;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: #474e5d;
+  padding-top: 50px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* Style the horizontal ruler */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #f1f1f1;
+}
+
+.close:hover,
+.close:focus {
+  color: #f44336;
+  cursor: pointer;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+  .cancelbtn, .signupbtn {
+     width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+
+<h1 id="title">Contact Manager</h1>
+
+<div id="loggedInDiv">
+	<span id="userName"></span><br />
+	<button style="width:auto;" onclick="doLogout();"> Log Out </button>
+</div>
+
+<!--ADD CONTACT-->
+
+<div id="accessUIDiv">
+	<br />
+	<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Add Contact</button>
+
+<div id="id01" class="modal">
+  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+	<!--changed action="/LAMPAPI/AddContact.php"-->
+	<form class="modal-content" action="#">
+    <div class="container">
+      <h1>Add Contact</h1>
+      <hr>
+
+
+      <label for="firstName"><b>First Name</b></label>
+      <input type="text" placeholder="First Name" id="newContactFName" name="firstName" required>
+
+      <label for="lastName"><b>Last Name</b></label>
+      <input type="text" placeholder="Last Name" id="newContactLName" name="lastName" required>
+
+     <label for="phone"><b>Phone Number</b></label>
+      <input type="text" placeholder="Phone Number" id="newContactPhoneNum" name="phone" required>
+
+      <label for="email"><b>Email</b></label>
+      <input type="text" placeholder="Email Address" id="newContactEmail" name="email" required>
+
+
+      <div class="clearfix">
+        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+        <button type="submit" class="signupbtn" onclick="addContact();">Add</button>
+				<span id="contactAddResult"></span>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!--EDIT CONTACT-->
+
+<div>
+	<br />
+	<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Edit Contact</button>
+
+<div class="modal">
+  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+	<!--changed action="/LAMPAPI/AddContact.php"-->
+	<form class="modal-content" action="#">
+    <div class="container">
+      <h2>Edit Contact</h2>
+      <hr>
+
+
+      <label for="firstName"><b>First Name</b></label>
+      <input type="text" placeholder="First Name" id="newContactFName" name="firstName" required>
+
+      <label for="lastName"><b>Last Name</b></label>
+      <input type="text" placeholder="Last Name" id="newContactLName" name="lastName" required>
+
+     <label for="phone"><b>Phone Number</b></label>
+      <input type="text" placeholder="Phone Number" id="newContactPhoneNum" name="phone" required>
+
+      <label for="email"><b>Email</b></label>
+      <input type="text" placeholder="Email Address" id="newContactEmail" name="email" required>
+
+
+      <div class="clearfix">
+        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+        <button type="submit" onclick="editContact();">Edit</button>
+				<span id="contactEditResult"></span>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div id = "search">
+<br />
+<br />
+	<input type="text" placeholder="Search.." id="searchText" name="search">
+	<button type="button" button onclick="doSearchContact();"><i class="fa fa-search"></i></button>
+	<span id="contactSearchResult"></span>
+	<p id="contactList"></p><br /><br />
+</div>
+
+</div>
+
+</body>
+</html>

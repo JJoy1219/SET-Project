@@ -1,0 +1,82 @@
+mysql> select * from Contacts;
++----+-------------+-----------------+-------------+------------------------+---------------------+--------+
+| ID | ContactName | ContactLastName | PhoneNumber | Email                  | ContactCreated      | UserID |
++----+-------------+-----------------+-------------+------------------------+---------------------+--------+
+|  1 | Paola       | Londono         | 4077481215  | pao4280@gmail.com      | 2021-05-21 00:00:00 |      1 |
+|  2 | Rose        | Smith           | 4075748374  | roser@gmail.com        | 2021-05-27 00:00:00 |      2 |
+|  3 | George      | Reeves          | 3647485629  | gprx@xmail.com         | 2021-05-27 00:00:00 |      3 |
+|  4 | Gabrielle   | Smith           | 6487352937  | pinky@gmail.com        | 2021-05-27 00:00:00 |      4 |
+|  5 | Andre       | Carson          | 3846574937  | ronn35@gmail.com       | 2021-05-27 00:00:00 |      5 |
+|  6 | Ronnie      | Smith           | 4074659564  | running@cloudmail.com  | 2021-05-27 00:00:00 |      1 |
+|  7 | Alexis      | Gonzalez        | 5364957456  | alexgon@go.com         | 2021-05-27 00:00:00 |      2 |
+|  8 | Smiddie     | Grant           | 4077856374  | gman@mail.com          | 2021-05-27 00:00:00 |      3 |
+|  9 | Lori        | Graham          | 9995746357  | xyz123@account.com     | 2021-05-27 00:00:00 |      4 |
+| 10 | Tim         | Sotomayor       | 6645374488  | timayor@gmail.com      | 2021-05-27 00:00:00 |      5 |
+| 11 | Carson      | Smith           | 3338465773  | csmith3@mail.com       | 2021-05-27 00:00:00 |      1 |
+| 12 | Annie       | Garcia          | 3452736456  | annieg123@fox.com      | 2021-05-27 00:00:00 |      2 |
+| 13 | Connie      | Garcia          | 4074476655  | conga@gmail.com        | 2021-05-27 00:00:00 |      3 |
+| 14 | Andy        | Lee             | 9874465867  | andisito@cloudmail.com | 2021-05-27 00:00:00 |      4 |
+| 15 | Susan       | Chan            | 3455645377  | suchan0@gmail.com      | 2021-05-27 00:00:00 |      5 |
++----+-------------+-----------------+-------------+------------------------+---------------------+--------+
+
+
+
+CREATE TABLE `COP4331`.`Contacts`
+(
+ `ID` INT NOT NULL AUTO_INCREMENT ,
+`ContactName` VARCHAR(50) NOT NULL DEFAULT '' ,
+`ContactLastName` VARCHAR(50) NOT NULL DEFAULT '' ,
+`PhoneNumber` VARCHAR(50) NOT NULL DEFAULT '' ,
+`Email` VARCHAR(50) NOT NULL DEFAULT '' ,
+`ContactCreated` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+`UserID` INT NOT NULL DEFAULT '0' ,
+PRIMARY KEY (`ID`)
+)
+ENGINE = InnoDB;
+
+
+
+insert into Contacts (ContactName,ContactLastName,PhoneNumber,Email,ContactCreated,UserID)
+VALUES ('Paola','Londono','4077481215','pao4280@gmail.com',CURDATE(),1);
+
+insert into Contacts (ContactName,ContactLastName,PhoneNumber,Email,ContactCreated,UserID)
+VALUES ('Rose','Smith','4075748374','roser@gmail.com',CURDATE(),2);
+
+insert into Contacts (ContactName,ContactLastName,PhoneNumber,Email,ContactCreated,UserID)
+VALUES ('George','Reeves','3647485629','gprx@xmail.com',CURDATE(),3);
+
+insert into Contacts (ContactName,ContactLastName,PhoneNumber,Email,ContactCreated,UserID)
+VALUES ('Gabrielle','Smith','6487352937','pinky@gmail.com',CURDATE(),4);
+
+insert into Contacts (ContactName,ContactLastName,PhoneNumber,Email,ContactCreated,UserID)
+VALUES ('Andre','Carson','3846574937','ronn35@gmail.com',CURDATE(),5);
+
+insert into Contacts (ContactName,ContactLastName,PhoneNumber,Email,ContactCreated,UserID)
+VALUES ('Ronnie','Smith','4074659564','running@cloudmail.com',CURDATE(),1);
+
+insert into Contacts (ContactName,ContactLastName,PhoneNumber,Email,ContactCreated,UserID)
+VALUES ('Alexis','Gonzalez','5364957456','alexgon@go.com',CURDATE(),2);
+
+insert into Contacts (ContactName,ContactLastName,PhoneNumber,Email,ContactCreated,UserID)
+VALUES ('Smiddie','Grant','4077856374','gman@mail.com',CURDATE(),3);
+
+insert into Contacts (ContactName,ContactLastName,PhoneNumber,Email,ContactCreated,UserID)
+VALUES ('Lori','Graham','9995746357','xyz123@account.com',CURDATE(),4);
+
+insert into Contacts (ContactName,ContactLastName,PhoneNumber,Email,ContactCreated,UserID)
+VALUES ('Tim','Sotomayor','6645374488','timayor@gmail.com',CURDATE(),5);
+
+insert into Contacts (ContactName,ContactLastName,PhoneNumber,Email,ContactCreated,UserID)
+VALUES ('Carson','Smith','3338465773','csmith3@mail.com',CURDATE(),1);
+
+insert into Contacts (ContactName,ContactLastName,PhoneNumber,Email,ContactCreated,UserID)
+VALUES ('Annie','Garcia','3452736456','annieg123@fox.com',CURDATE(),2);
+
+insert into Contacts (ContactName,ContactLastName,PhoneNumber,Email,ContactCreated,UserID)
+VALUES ('Connie','Garcia','4074476655','conga@gmail.com',CURDATE(),3);
+
+insert into Contacts (ContactName,ContactLastName,PhoneNumber,Email,ContactCreated,UserID)
+VALUES ('Andy','Lee','9874465867','andisito@cloudmail.com',CURDATE(),4);
+
+insert into Contacts (ContactName,ContactLastName,PhoneNumber,Email,ContactCreated,UserID)
+VALUES ('Susan','Chan','3455645377','suchan0@gmail.com',CURDATE(),5);

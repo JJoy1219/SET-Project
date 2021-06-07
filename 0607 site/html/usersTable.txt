@@ -1,0 +1,43 @@
+
+
+mysql> select * from Users;
++----+---------------------+---------------------+-----------+----------+------------+-----------+
+| ID | DateCreated         | DateLastLoggedIn    | FirstName | LastName | Login      | Password  |
++----+---------------------+---------------------+-----------+----------+------------+-----------+
+|  1 | 2021-05-21 00:00:00 | 2021-05-21 18:49:49 | John      | Smith    | johnS      | pass123   |
+|  2 | 2021-05-27 00:00:00 | 2021-05-27 22:58:31 | Anna      | Ross     | ross12     | unit34    |
+|  3 | 2021-05-27 00:00:00 | 2021-05-27 22:58:31 | Clare     | Fraser   | Outland12  | grass888  |
+|  4 | 2021-05-27 00:00:00 | 2021-05-27 22:58:31 | Felix     | Ornell   | felix1     | abc123    |
+|  5 | 2021-05-27 00:00:00 | 2021-05-27 22:58:37 | Claude    | Clermont | claude2000 | mypass000 |
++----+---------------------+---------------------+-----------+----------+------------+-----------+
+
+
+
+CREATE TABLE `COP4331`.`Users`
+(
+`ID` INT NOT NULL AUTO_INCREMENT ,
+`DateCreated` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+`FirstName` VARCHAR(50) NOT NULL DEFAULT '' ,
+`LastName` VARCHAR(50) NOT NULL DEFAULT '' ,
+`Login` VARCHAR(50) NOT NULL DEFAULT '' ,
+`Password` VARCHAR(50) NOT NULL DEFAULT '' ,
+PRIMARY KEY (`ID`)
+)
+ENGINE = InnoDB;
+
+
+
+insert into Users (DateCreated,FirstName,LastName,Login,Password,ID) VALUES
+(CURDATE(),'John','Smith','johnS','pass123',1);
+
+insert into Users (DateCreated,FirstName,LastName,Login,Password,ID) VALUES
+(CURDATE(),'Anna','Ross','ross12','unit34',2);
+
+insert into Users (DateCreated,FirstName,LastName,Login,Password,ID) VALUES
+(CURDATE(),'Clare','Fraser','Outland12','grass888',3);
+
+insert into Users (DateCreated,FirstName,LastName,Login,Password,ID) VALUES
+(CURDATE(),'Felix','Ornell','felix1','abc123',4);
+
+insert into Users (DateCreated,FirstName,LastName,Login,Password,ID) VALUES
+(CURDATE(),'Claude','Clermont','claude2000','mypass000',5);
