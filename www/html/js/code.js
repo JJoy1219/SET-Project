@@ -1,11 +1,18 @@
 var urlBase = 'http://cop4331-group1.xyz/LAMPAPI';
 var extension = 'php';
 
+// User
 var userId = 0;
 var firstName = "";
 var lastName = "";
 var login = "";
 var password = "";
+
+// Contact
+var contactFName = "";
+var contactLName = "";
+var contactPhoneNum = "";
+var contactEmail = "";
 
 function doLogin()
 {
@@ -54,7 +61,7 @@ function doLogin()
 
 				saveCookie();
 
-				window.location.href = "color.html";
+				window.location.href = "contact.html";
 
 			}
 		};
@@ -83,7 +90,10 @@ function doRegister()
 	//			 the content of the element.
 	document.getElementById("registerResult").innerHTML = "";
 
-	var jsonPayload = '{"firstname" : "' + firstName + '", "lastname" : "' + lastName + '", "login" : "' + login + '", "password" : "' + password + '"}';
+	var jsonPayload = '{"firstname" : "' + firstName
+									+ '", "lastname" : "' + lastName
+									+ '", "login" : "' + login
+									+ '", "password" : "' + password + '"}';
 
 	var url = urlBase + '/Registration.' + extension;
 
@@ -172,7 +182,9 @@ function saveCookie()
 	var minutes = 20;
 	var date = new Date();
 	date.setTime(date.getTime()+(minutes*60*1000));
-	document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId + ";expires=" + date.toGMTString();
+	document.cookie = "firstName=" + firstName
+									+ ",lastName=" + lastName
+									+ ",userId=" + userId + ";expires=" + date.toGMTString();
 }
 
 function readCookie()
@@ -213,17 +225,43 @@ function doLogout()
 	userId = 0;
 	firstName = "";
 	lastName = "";
+	login = "";
+	password = "";
+	contactFName = "";
+	contactLName = "";
+	contactPhoneNum = "";
+	contactEmail = "";
 	document.cookie = "firstName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
 	window.location.href = "index.html";
 }
 
-function addColor()
+// Purpose: adds a new contact to user's database
+function doAddContact()
 {
-	var newColor = document.getElementById("colorText").value;
-	document.getElementById("colorAddResult").innerHTML = "";
+	// Note: obtain the values inputted by the user from the contact.html file
+	contactFName = document.getElementById("newContactFName").value;
+	contactLName = document.getElementById("newContactLName").value;
+	contactPhoneNum = document.getElementById("newContactPhoneNum").value;
+	contactEmail = document.getElementById("newContactEmail").value;
+	document.getElementById("contactAddResult").innerHTML = "";
 
-	var jsonPayload = '{"color" : "' + newColor + '", "userId" : ' + userId + '}';
-	var url = urlBase + '/AddColor.' + extension;
+	// Note: Get current date and time
+	var currentdate = new Date();
+	var datetime = currentdate.getFullYear() + "-"
+               + (currentdate.getMonth()+1)  + "-"
+               + currentdate.getDate() + " "
+               + currentdate.getHours() + ":"
+               + currentdate.getMinutes() + ":"
+               + currentdate.getSeconds();
+
+	var jsonPayload = '{"ContactName" : "' + contactFName
+									+ '", "ContactLastName" : "' + contactLName
+									+ '", "PhoneNumber" : "' + contactPhoneNum
+									+ '", "Email" : "' + contactEmail
+									+ '", "ContactCreated" : "' + datetime
+									+ '", "UserId" : "' + userId + '"}';
+
+	var url = urlBase + '/AddContact.' + extension;
 
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
@@ -234,57 +272,150 @@ function addColor()
 		{
 			if (this.readyState == 4 && this.status == 200)
 			{
-				document.getElementById("colorAddResult").innerHTML = "Color has been added";
+				document.getElementById("contactAddResult").innerHTML = "Contacts Updated";
 			}
 		};
 		xhr.send(jsonPayload);
 	}
 	catch(err)
 	{
-		document.getElementById("colorAddResult").innerHTML = err.message;
+		document.getElementById("contactAddResult").innerHTML = err.message;
 	}
-
 }
 
-function searchColor()
+// Purpose: searches for contact w/ inputted keyword(s) by user
+function doSearchContact()
 {
 	var srch = document.getElementById("searchText").value;
-	document.getElementById("colorSearchResult").innerHTML = "";
+	document.getElementById("contactSearchResult").innerHTML = "";
 
-	var colorList = "";
+	var contactList = "";
 
-	var jsonPayload = '{"search" : "' + srch + '","userId" : ' + userId + '}';
-	var url = urlBase + '/SearchColors.' + extension;
+	var jsonPayload = '{"search" : "' + srch + '","UserId" : ' + userId + '}';
+	var url = urlBase + '/SearchContact.' + extension;
 
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+	console.log("Searching User...");
 	try
 	{
 		xhr.onreadystatechange = function()
 		{
 			if (this.readyState == 4 && this.status == 200)
 			{
-				document.getElementById("colorSearchResult").innerHTML = "Color(s) has been retrieved";
+				document.getElementById("contactSearchResult").innerHTML = "Contact(s) has been retrieved";
 				var jsonObject = JSON.parse( xhr.responseText );
 
 				for( var i=0; i<jsonObject.results.length; i++ )
 				{
-					colorList += jsonObject.results[i];
+					// HTML output for Name, Phone Number, Email
+					contactList += "<strong>Contact Name: </strong>" + jsonObject.results[i].ContactName + " " + jsonObject.results[i].ContactLastName + "<br />"
+											+ "<strong>Phone Number: </strong>" + jsonObject.results[i].PhoneNumber + "<br />"
+											+ "<strong>Email: </strong>" + jsonObject.results[i].Email + "<br />";
+
+					// HTML output for Delete Button
+					// Note: deleteConfirm to process press OK calls deleteContact else do nothing.
+					var temp = jsonObject.results[i].ID;
+					contactList += '<button button type="button" onclick="deleteConfirm(' + temp + ');">Delete '
+											+ jsonObject.results[i].ContactName
+											+ '</button><span id="contactDeleteResult"></span>';
+
 					if( i < jsonObject.results.length - 1 )
 					{
-						colorList += "<br />\r\n";
+						contactList += "<br /><br />\r\n";
 					}
 				}
 
-				document.getElementsByTagName("p")[0].innerHTML = colorList;
+				document.getElementsByTagName("p")[0].innerHTML = contactList;
+			}
+		};
+
+		console.log("Sending");
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		console.log("Failed!");
+		document.getElementById("contactSearchResult").innerHTML = err.message;
+	}
+}
+
+// Purpose: confirms if the user intends to delete contact
+function deleteConfirm( deleteID )
+{  var a = confirm("Are you sure you want to delete?");
+   if(a == true)
+   {
+     doDeleteContact( deleteID );
+   }
+}
+
+function doDeleteContact( deleteID )
+{
+	document.getElementById("contactDeleteResult").innerHTML = "";
+
+	var jsonPayload = '{"ID" : "' + deleteID + '"}';
+	var url = urlBase + '/DeleteContact.' + extension;
+
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
+	{
+		xhr.onreadystatechange = function()
+		{
+			if (this.readyState == 4 && this.status == 200)
+			{
+				document.getElementById("contactDeleteResult").innerHTML = "Contact Deleted";
+			}
+		};
+		xhr.send(jsonPayload);
+		window.location.href = "contact.html";
+	}
+	catch(err)
+	{
+		document.getElementById("contactDeleteResult").innerHTML = err.message;
+	}
+}
+
+function doEditContact()
+{
+	// Note: obtain the values inputted by the user from the contact.html file
+	contactFName = document.getElementById("editContactFName").value;
+	contactLName = document.getElementById("editContactLName").value;
+	contactPhoneNum = document.getElementById("editContactPhoneNum").value;
+	contactEmail = document.getElementById("editContactEmail").value;
+	document.getElementById("contactEditResult").innerHTML = "";
+
+	console.log("FirstName: " + contactFName + " LastName: " + contactLName);
+
+	var jsonPayload = '{"ContactName" : "' + contactFName
+									+ '", "ContactLastName" : "' + contactLName
+									+ '", "PhoneNumber" : "' + contactPhoneNum
+									+ '", "Email" : "' + contactEmail
+									+ '", "UserId" : "' + userId + '"}';
+
+	var url = urlBase + '/EditContact.' + extension;
+
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
+	{
+		xhr.onreadystatechange = function()
+		{
+			if (this.readyState == 4 && this.status == 200)
+			{
+				console.log("Success: Checkpoint!");
+				document.getElementById("contactEditResult").innerHTML = "Contacts Updated";
 			}
 		};
 		xhr.send(jsonPayload);
 	}
 	catch(err)
 	{
-		document.getElementById("colorSearchResult").innerHTML = err.message;
+		console.log("Failed: Checkpoint!");
+		document.getElementById("contactEditResult").innerHTML = err.message;
 	}
-
 }
