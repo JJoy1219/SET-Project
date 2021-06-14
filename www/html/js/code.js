@@ -162,7 +162,7 @@ function doRegister()
 
 				saveCookie();
 
-				window.location.href = "color.html";
+				window.location.href = "contact.html";
 			}
 		};
 
@@ -245,6 +245,8 @@ function doAddContact()
 	contactEmail = document.getElementById("newContactEmail").value;
 	document.getElementById("contactAddResult").innerHTML = "";
 
+	console.log("Adding!");
+
 	// Note: Get current date and time
 	var currentdate = new Date();
 	var datetime = currentdate.getFullYear() + "-"
@@ -305,26 +307,35 @@ function doSearchContact()
 		{
 			if (this.readyState == 4 && this.status == 200)
 			{
-				document.getElementById("contactSearchResult").innerHTML = "Contact(s) has been retrieved";
 				var jsonObject = JSON.parse( xhr.responseText );
 
-				for( var i=0; i<jsonObject.results.length; i++ )
+				if (jsonObject.results == undefined)
 				{
-					// HTML output for Name, Phone Number, Email
-					contactList += "<strong>Contact Name: </strong>" + jsonObject.results[i].ContactName + " " + jsonObject.results[i].ContactLastName + "<br />"
-											+ "<strong>Phone Number: </strong>" + jsonObject.results[i].PhoneNumber + "<br />"
-											+ "<strong>Email: </strong>" + jsonObject.results[i].Email + "<br />";
+					alert("No contact(s) found!");
+				}
 
-					// HTML output for Delete Button
-					// Note: deleteConfirm to process press OK calls deleteContact else do nothing.
-					var temp = jsonObject.results[i].ID;
-					contactList += '<button button type="button" onclick="deleteConfirm(' + temp + ');">Delete '
-											+ jsonObject.results[i].ContactName
-											+ '</button><span id="contactDeleteResult"></span>';
+				else
+				{
+					document.getElementById("contactSearchResult").innerHTML = "Contact(s) has been retrieved";
 
-					if( i < jsonObject.results.length - 1 )
+					for( var i=0; i<jsonObject.results.length; i++ )
 					{
-						contactList += "<br /><br />\r\n";
+						// HTML output for Name, Phone Number, Email
+						contactList += "<strong>Contact Name: </strong>" + jsonObject.results[i].ContactName + " " + jsonObject.results[i].ContactLastName + "<br />"
+												+ "<strong>Phone Number: </strong>" + jsonObject.results[i].PhoneNumber + "<br />"
+												+ "<strong>Email: </strong>" + jsonObject.results[i].Email + "<br />";
+
+						// HTML output for Delete Button
+						// Note: deleteConfirm to process press OK calls deleteContact else do nothing.
+						var temp = jsonObject.results[i].ID;
+						contactList += '<button button type="button" onclick="deleteConfirm(' + temp + ');">Delete '
+												+ jsonObject.results[i].ContactName
+												+ '</button><span id="contactDeleteResult"></span>';
+
+						if( i < jsonObject.results.length - 1 )
+						{
+							contactList += "<br /><br />\r\n";
+						}
 					}
 				}
 
@@ -345,8 +356,9 @@ function doSearchContact()
 // Purpose: confirms if the user intends to delete contact
 function deleteConfirm( deleteID )
 {  var a = confirm("Are you sure you want to delete?");
-   if(a == true)
+   if(a != false)
    {
+		 console.log("PROCEED TO DELETION.. making function call!");
      doDeleteContact( deleteID );
    }
 }
